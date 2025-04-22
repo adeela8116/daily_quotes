@@ -9,7 +9,8 @@ import '../../../../utils/ColorHelper.dart';
 import '../controllers/quote_controller.dart';
 
 class QuoteView extends GetView<QuoteController> {
-  const QuoteView({super.key});
+  QuoteView({super.key});
+  QuoteController controller = Get.put(QuoteController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class QuoteView extends GetView<QuoteController> {
             30.spaceX,
             Center(
               child: Text(
-                '${controller.homeController.selectedQuote}',
+                '${controller.selectedQuote}',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -49,7 +50,7 @@ class QuoteView extends GetView<QuoteController> {
 
             120.spaceX,
             Text(
-              '-  ${controller.homeController.selectedQuoteAuthor}  -',
+              '-  ${controller.selectedQuoteAuthor}  -',
 
               style: TextStyle(
                 fontSize: 12,
@@ -75,7 +76,7 @@ class QuoteView extends GetView<QuoteController> {
                         20.spaceY,
                          GestureDetector(
                            onTap:(){
-                             controller.favQuote('${controller.homeController.selectedQuote}~${controller.homeController.selectedQuoteAuthor}');
+                             controller.favQuote('${controller.selectedQuote}~${controller.selectedQuoteAuthor}');
                            },
                              child: bottomButtons(
                                  Icon(controller.isFav.value?Icons.favorite:Icons.favorite_border, color: ColorHelper.primaryYellow,)
@@ -84,7 +85,7 @@ class QuoteView extends GetView<QuoteController> {
 
                         GestureDetector(
                             onTap:(){
-                              controller.shareQuote('"${controller.homeController.selectedQuote}" \n ~~${controller.homeController.selectedQuoteAuthor}');
+                              controller.shareQuote('"${controller.selectedQuote}" \n ~~${controller.selectedQuoteAuthor}');
                             },
                             child: bottomButtons(
                                 Icon(controller.isShared.value?CupertinoIcons.share_solid:CupertinoIcons.share, color: ColorHelper.primaryYellow,)
@@ -93,7 +94,7 @@ class QuoteView extends GetView<QuoteController> {
 
                         GestureDetector(
                             onTap:(){
-                              controller.copyQuote('"${controller.homeController.selectedQuote}" \n ~~${controller.homeController.selectedQuoteAuthor}');
+                              controller.copyQuote('"${controller.selectedQuote}" \n ~~${controller.selectedQuoteAuthor}');
                             },
                             child: bottomButtons(Icon(controller.isCopied.value?Icons.file_copy:Icons.copy, color: ColorHelper.primaryYellow,))
                         ),

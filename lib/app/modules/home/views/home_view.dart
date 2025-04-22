@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../utils/ColorHelper.dart';
 import '../../../../utils/helping_widgets/animated_container.dart';
 import '../../../routes/app_pages.dart';
+import '../../Quote/views/quote_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -28,21 +29,49 @@ class HomeView extends GetView<HomeController> {
               60.spaceX,
               Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
-                child: const Text(
-                  "Daily Dose of Inspiration",
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(2.0, 2.0),
-                        blurRadius: 3.0,
-                        color: ColorHelper.lightPurple,
+                child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: const Text(
+                        "Daily Dose of Inspiration",
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              offset: Offset(2.0, 2.0),
+                              blurRadius: 3.0,
+                              color: ColorHelper.lightPurple,
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(Routes.FAV_QUOTES);
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorHelper.white.withOpacity(0.3),
+                            border: Border.all(color: ColorHelper.lightPurple.withOpacity(0.35), width: 2.5),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorHelper.lightViolet.withOpacity(0.9),
+                                spreadRadius: 3,
+                                blurRadius: 10,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                          padding: EdgeInsets.all(5),
+                          child: Icon(Icons.favorite, color: ColorHelper.primaryPurple,)
+                      ),
+                    )
+                  ],
                 ),
               ),
               40.spaceX,
@@ -77,14 +106,16 @@ class HomeView extends GetView<HomeController> {
   Widget singleQuoteContainer(String content, String author) {
     return GestureDetector(
       onTap: (){
-        controller.selectedQuote.value = content;
-        controller.selectedQuoteAuthor.value = author;
-        Get.toNamed(Routes.QUOTE);
+        Get.to(() => QuoteView(), arguments: {
+          'content': content,
+          'author': author,
+          'isFav' : false
+        });
       },
       child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              color: ColorHelper.bGLight1,
+              color: ColorHelper.primaryPurple,
               borderRadius: BorderRadius.circular(20)
           ),
           constraints: BoxConstraints(

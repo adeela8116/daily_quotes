@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/FavQuotes/bindings/fav_quotes_binding.dart';
+import '../modules/FavQuotes/views/fav_quotes_view.dart';
 import '../modules/Quote/bindings/quote_binding.dart';
 import '../modules/Quote/views/quote_view.dart';
 import '../modules/Splash/bindings/splash_binding.dart';
@@ -27,8 +29,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.QUOTE,
-      page: () => const QuoteView(),
+      page: () => QuoteView(),
       binding: QuoteBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAV_QUOTES,
+      page: () => const FavQuotesView(),
+      binding: FavQuotesBinding(),
     ),
   ];
 }

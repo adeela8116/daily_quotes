@@ -7,7 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class QuoteController extends GetxController {
   //TODO: Implement QuoteController
-  HomeController homeController = Get.put(HomeController());
+  RxString selectedQuote = ''.obs;
+  RxString selectedQuoteAuthor = ''.obs;
+
   RxBool isFav = false.obs;
   RxBool isShared = false.obs;
   RxBool isCopied = false.obs;
@@ -15,6 +17,13 @@ class QuoteController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print("onInit");
+    if (Get.arguments != null) {
+      print("onInit not null");
+      selectedQuote.value = Get.arguments['content'] ?? '';
+      selectedQuoteAuthor.value = Get.arguments['author'] ?? '';
+      isFav.value = Get.arguments['isFav'] ?? '';
+    }
   }
 
   @override
@@ -25,7 +34,11 @@ class QuoteController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    selectedQuote.value = '';
+    selectedQuoteAuthor.value = '';
+    print("closed");
   }
+
 
   void favQuote(String quote) {
     isFav.value = !(isFav.value);

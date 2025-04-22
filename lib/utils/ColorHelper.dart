@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ColorHelper{
   // static const Color alertWarning = Color.fromRGBO(234, 155, 2, 1);
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
-  static const Color bGLight1 = Color(0xFF6D466B);
+  static const Color primaryPurple = Color(0xFF6D466B);
   static const Color beige1 = Color(0xFFFFF5E1);
   static const Color beige2 = Color(0xFFFFF8DC);
   static const Color aquaGreen = Color(0xFF5F9EA0);

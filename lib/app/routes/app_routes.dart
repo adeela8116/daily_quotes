@@ -6,6 +6,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const SPLASH = _Paths.SPLASH;
   static const QUOTE = _Paths.QUOTE;
+  static const FAV_QUOTES = _Paths.FAV_QUOTES;
 }
 
 abstract class _Paths {
@@ -13,4 +14,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const SPLASH = '/splash';
   static const QUOTE = '/quote';
+  static const FAV_QUOTES = '/fav-quotes';
 }

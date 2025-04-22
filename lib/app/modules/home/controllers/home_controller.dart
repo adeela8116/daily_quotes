@@ -9,8 +9,6 @@ import '../../../models/quotes.dart';
 class HomeController extends GetxController {
   //TODO: Implement HomeController
   RxList<Quote> quotesList = <Quote>[].obs;
-  RxString selectedQuote = ''.obs;
-  RxString selectedQuoteAuthor = ''.obs;
 
 
   @override
@@ -37,7 +35,6 @@ class HomeController extends GetxController {
         final List quotesJson = json.decode(response.body);
         final List<Quote> quotes = quotesJson.map((json) => Quote.fromJson(json)).toList();
         quotesList.value = quotes;
-        print('First quote: ${quotesList[0].content} by ${quotesList[0].author}');
         quotesList.refresh();
       } else {
         print('Error fetching quotes');
