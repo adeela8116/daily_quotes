@@ -1,5 +1,7 @@
 import 'package:daily_quotes/utils/extentions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'package:get/get.dart';
 
@@ -63,6 +65,85 @@ class QuoteView extends GetView<QuoteController> {
               ),
               textAlign: TextAlign.center,
             ),
+
+            200.spaceX,
+            Obx(
+                (){
+                  return Container(
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        20.spaceY,
+                         GestureDetector(
+                           onTap:controller.favQuote,
+                             child: Container(
+                                 decoration: BoxDecoration(
+                                   color: ColorHelper.white.withOpacity(0.6),
+                                   border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
+                                   borderRadius: BorderRadius.circular(10),
+                                   boxShadow: [
+                                     BoxShadow(
+                                       color: ColorHelper.lightViolet.withOpacity(0.9),
+                                       spreadRadius: 3,
+                                       blurRadius: 10,
+                                       offset: Offset(0, 5), // changes position of shadow
+                                     ),
+                                   ],
+                                 ),
+                                 padding: EdgeInsets.all(5),
+                                 child: Icon(controller.isFav.value?Icons.favorite:Icons.favorite_border, color: ColorHelper.primaryYellow,)
+                             )
+                         ),
+
+                        GestureDetector(
+                            onTap:(){
+                              controller.shareQuote('"${controller.homeController.selectedQuote}" \n ~~${controller.homeController.selectedQuoteAuthor}');
+                            },
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  color: ColorHelper.white.withOpacity(0.6),
+                                  border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ColorHelper.lightViolet.withOpacity(0.9),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0, 5), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.all(5),
+                                child: Icon(controller.isShared.value?CupertinoIcons.share:CupertinoIcons.share_solid, color: ColorHelper.primaryYellow,)
+                            )
+                        ),
+
+                        GestureDetector(
+                            onTap:controller.copyQuote,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: ColorHelper.white.withOpacity(0.6),
+                                    border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
+                                    borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ColorHelper.lightViolet.withOpacity(0.9),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0, 5), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.all(5),
+                                child: Icon(controller.isCopied.value?Icons.copy:Icons.file_copy, color: ColorHelper.primaryYellow,)
+                            )
+                        ),
+
+                        20.spaceY,
+                      ],
+                    ),
+                  );
+                }
+            )
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ColorHelper{
   // static const Color alertWarning = Color.fromRGBO(234, 155, 2, 1);
@@ -18,4 +19,7 @@ class ColorHelper{
   static const Color primaryYellow_3 = Color(0xFFFFD08A);
   static const Color primaryYellow_4 = Color(0xFFFFC061);
   static const Color primaryYellow_5 = Color(0xFFFFC061);
+
+
+  static Color transparent = Colors.transparent;
 }

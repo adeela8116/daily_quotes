@@ -34,6 +34,13 @@ class HomeView extends GetView<HomeController> {
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 3.0,
+                        color: ColorHelper.lightPurple,
+                      ),
+                    ],
                   ),
                   textAlign: TextAlign.center,
                 ),
