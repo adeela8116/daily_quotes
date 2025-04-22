@@ -74,23 +74,11 @@ class QuoteView extends GetView<QuoteController> {
                       children: [
                         20.spaceY,
                          GestureDetector(
-                           onTap:controller.favQuote,
-                             child: Container(
-                                 decoration: BoxDecoration(
-                                   color: ColorHelper.white.withOpacity(0.6),
-                                   border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
-                                   borderRadius: BorderRadius.circular(10),
-                                   boxShadow: [
-                                     BoxShadow(
-                                       color: ColorHelper.lightViolet.withOpacity(0.9),
-                                       spreadRadius: 3,
-                                       blurRadius: 10,
-                                       offset: Offset(0, 5), // changes position of shadow
-                                     ),
-                                   ],
-                                 ),
-                                 padding: EdgeInsets.all(5),
-                                 child: Icon(controller.isFav.value?Icons.favorite:Icons.favorite_border, color: ColorHelper.primaryYellow,)
+                           onTap:(){
+                             controller.favQuote('${controller.homeController.selectedQuote}~${controller.homeController.selectedQuoteAuthor}');
+                           },
+                             child: bottomButtons(
+                                 Icon(controller.isFav.value?Icons.favorite:Icons.favorite_border, color: ColorHelper.primaryYellow,)
                              )
                          ),
 
@@ -98,44 +86,16 @@ class QuoteView extends GetView<QuoteController> {
                             onTap:(){
                               controller.shareQuote('"${controller.homeController.selectedQuote}" \n ~~${controller.homeController.selectedQuoteAuthor}');
                             },
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  color: ColorHelper.white.withOpacity(0.6),
-                                  border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorHelper.lightViolet.withOpacity(0.9),
-                                      spreadRadius: 3,
-                                      blurRadius: 10,
-                                      offset: Offset(0, 5), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                padding: EdgeInsets.all(5),
-                                child: Icon(controller.isShared.value?CupertinoIcons.share:CupertinoIcons.share_solid, color: ColorHelper.primaryYellow,)
+                            child: bottomButtons(
+                                Icon(controller.isShared.value?CupertinoIcons.share_solid:CupertinoIcons.share, color: ColorHelper.primaryYellow,)
                             )
                         ),
 
                         GestureDetector(
-                            onTap:controller.copyQuote,
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: ColorHelper.white.withOpacity(0.6),
-                                    border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorHelper.lightViolet.withOpacity(0.9),
-                                      spreadRadius: 3,
-                                      blurRadius: 10,
-                                      offset: Offset(0, 5), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                padding: EdgeInsets.all(5),
-                                child: Icon(controller.isCopied.value?Icons.copy:Icons.file_copy, color: ColorHelper.primaryYellow,)
-                            )
+                            onTap:(){
+                              controller.copyQuote('"${controller.homeController.selectedQuote}" \n ~~${controller.homeController.selectedQuoteAuthor}');
+                            },
+                            child: bottomButtons(Icon(controller.isCopied.value?Icons.file_copy:Icons.copy, color: ColorHelper.primaryYellow,))
                         ),
 
                         20.spaceY,
@@ -148,5 +108,25 @@ class QuoteView extends GetView<QuoteController> {
         ),
       ),
     );
+  }
+
+  Container bottomButtons(Widget icon) {
+    return Container(
+         decoration: BoxDecoration(
+           color: ColorHelper.white.withOpacity(0.6),
+           border: Border.all(color: ColorHelper.lightPurple, width: 2.5),
+           borderRadius: BorderRadius.circular(10),
+           boxShadow: [
+             BoxShadow(
+               color: ColorHelper.lightViolet.withOpacity(0.9),
+               spreadRadius: 3,
+               blurRadius: 10,
+               offset: Offset(2, 2),
+             ),
+           ],
+         ),
+         padding: EdgeInsets.all(5),
+         child: icon
+     );
   }
 }

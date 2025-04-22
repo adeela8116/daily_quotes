@@ -1,6 +1,9 @@
 import 'package:daily_quotes/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuoteController extends GetxController {
   //TODO: Implement QuoteController
@@ -24,8 +27,9 @@ class QuoteController extends GetxController {
     super.onClose();
   }
 
-  void favQuote() {
+  void favQuote(String quote) {
     isFav.value = !(isFav.value);
+    storeLikedQuote(quote);
   }
 
   void shareQuote(String quote) {
@@ -34,8 +38,22 @@ class QuoteController extends GetxController {
   }
 
 
-  void copyQuote() {
-    isCopied.value = !(isCopied.value);
+  void copyQuote(String quote) {
+    isCopied.value = true;
+    Clipboard.setData(ClipboardData(text: quote));
+    Get.snackbar( colorText: Colors.black, backgroundColor: Colors.white.withOpacity(0.8), 'Alert!', 'Quote copied to clipboard');
   }
 
+
+  Future<void> storeLikedQuote(String quote) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> likedQuotes = prefs.getStringList('likedQuotes') ?? [];
+
+    if (!likedQuotes.contains(quote)) {
+      likedQuotes.add(quote);
+    }else{
+      likedQuotes.remove(quote);
+    }
+    await prefs.setStringList('likedQuotes', likedQuotes);
+  }
 }
