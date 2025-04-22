@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../utils/ColorHelper.dart';
 import '../../../../utils/helping_widgets/animated_container.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -16,10 +17,10 @@ class HomeView extends GetView<HomeController> {
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [ColorHelper.primaryYellow, ColorHelper.primaryYellow, ColorHelper.primaryYellow, ColorHelper.white],
+              colors: [ColorHelper.beige1, ColorHelper.lightViolet, ColorHelper.lightViolet, ColorHelper.beige1],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: [0.0, 0.4, 0.6, 1.0],
+              stops: [0.0, 0.2, 0.6, 1.0],
             ),
           ),
           child: Column(
@@ -50,7 +51,10 @@ class HomeView extends GetView<HomeController> {
                         childDelegate: ListWheelChildLoopingListDelegate(
                             children: [
                               for(int i=0; i<controller.quotesList.length; i++)
-                                singleQuoteContainer(i)
+                                singleQuoteContainer(
+                                  controller.quotesList[i].content,
+                                  controller.quotesList[i].author
+                                )
                             ]
                         ),
                       ),
@@ -63,44 +67,51 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Container singleQuoteContainer(int i) {
-    return Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: ColorHelper.bGLight1,
-            borderRadius: BorderRadius.circular(20)
-        ),
-        constraints: BoxConstraints(
-          minHeight: 100,
-          maxHeight: 210,
-        ),
-        margin: EdgeInsets.symmetric(horizontal: 8),
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              controller.quotesList[i].content,
-              style: TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+  Widget singleQuoteContainer(String content, String author) {
+    return GestureDetector(
+      onTap: (){
+        controller.selectedQuote.value = content;
+        controller.selectedQuoteAuthor.value = author;
+        Get.toNamed(Routes.QUOTE);
+      },
+      child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: ColorHelper.bGLight1,
+              borderRadius: BorderRadius.circular(20)
+          ),
+          constraints: BoxConstraints(
+            minHeight: 100,
+            maxHeight: 210,
+          ),
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                content,
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            10.spaceX,
-            Text(
-              controller.quotesList[i].author,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+              10.spaceX,
+              Text(
+                author,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+            ],
+          ),
+      ),
     );
   }
 }

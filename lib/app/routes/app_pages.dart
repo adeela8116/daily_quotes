@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/Quote/bindings/quote_binding.dart';
+import '../modules/Quote/views/quote_view.dart';
 import '../modules/Splash/bindings/splash_binding.dart';
 import '../modules/Splash/views/splash_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUOTE,
+      page: () => const QuoteView(),
+      binding: QuoteBinding(),
     ),
   ];
 }
