@@ -1,8 +1,8 @@
+import 'dart:math' as math;
 import 'package:daily_quotes/utils/extentions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../../../../utils/ColorHelper.dart';
 import '../../../../utils/helping_widgets/animated_container.dart';
 import '../../../routes/app_pages.dart';
@@ -112,43 +112,73 @@ class HomeView extends GetView<HomeController> {
           'isFav' : false
         });
       },
-      child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: ColorHelper.primaryPurple,
-              borderRadius: BorderRadius.circular(20)
-          ),
-          constraints: BoxConstraints(
-            minHeight: 100,
-            maxHeight: 210,
-          ),
-          margin: EdgeInsets.symmetric(horizontal: 8),
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                content,
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
+      child: Stack(
+        children: [
+          Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: ColorHelper.primaryPurple,
+                  borderRadius: BorderRadius.circular(20)
               ),
-              10.spaceX,
-              Text(
-                author,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
+              constraints: BoxConstraints(
+                minHeight: 100,
+                maxHeight: 210,
               ),
-            ],
+              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    content,
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  10.spaceX,
+                  Text(
+                    author,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
           ),
+
+          Positioned(right: 5, top: 0,
+            child: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: ColorHelper.white,
+                shape: BoxShape.circle,
+              ),
+              child: Container(
+                width: 26,
+                height: 26,
+                decoration: BoxDecoration(
+                  color: ColorHelper.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: ColorHelper.primaryPurple, width: 3)
+                ),
+                child: Center(
+                  child: Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.rotationY(math.pi),
+                      child: Icon(Icons.reply, color: ColorHelper.primaryPurple, size: 17)
+                  ),
+                ),
+              ),
+            )
+          )
+        ],
       ),
     );
   }

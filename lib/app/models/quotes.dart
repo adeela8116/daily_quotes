@@ -10,4 +10,15 @@ class Quote {
       author: json['a'],
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Quote &&
+              runtimeType == other.runtimeType &&
+              content == other.content &&
+              author == other.author;
+
+  @override
+  int get hashCode => content.hashCode ^ author.hashCode;
 }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,7 +32,8 @@ class HomeController extends GetxController {
     try{
       if (response.statusCode == 200) {
         final List quotesJson = json.decode(response.body);
-        final List<Quote> quotes = quotesJson.map((json) => Quote.fromJson(json)).toList();
+        final List<Quote> quotes =
+        quotesJson.map((json) => Quote.fromJson(json)).toList();
         quotesList.value = quotes;
         quotesList.refresh();
       } else {
